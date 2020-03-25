@@ -15,10 +15,17 @@ class AppState with ChangeNotifier {
 
   List<Question> questions = [];
 
-  int _currentPageIndex = 0;
-  int get currentPageIndex => _currentPageIndex;
-  set currentPageIndex(int newValue) {
-    _currentPageIndex = newValue;
+  int _currentQuestionIndex = 0;
+  int get currentQuestionIndex => _currentQuestionIndex;
+  set currentQuestionIndex(int newValue) {
+    _currentQuestionIndex = newValue;
+    notifyListeners();
+  }
+
+  HomePageContent _currentContentIndex = HomePageContent.start;
+  HomePageContent get currentContentIndex => _currentContentIndex;
+  set currentContentIndex(HomePageContent newValue) {
+    _currentContentIndex = newValue;
     notifyListeners();
   }
 
@@ -32,7 +39,19 @@ class AppState with ChangeNotifier {
   //
   Future<void> fetchData() async {
     isFetching = true;
-    questions = await getQuestionsList();
+    //questions = await getQuestionsList();
+
+    String jsondata;
+    dynamic _response;
+
+    _response = await http.get(kUrlQuestions);
+    if (_response.statusCode == 200) {
+      jsondata = _response.body;
+      print(jsondata);
+    }
+
+    questions = parseQuestions(jsondata);
+
     _isFetching = false;
     notifyListeners();
   }
@@ -56,4 +75,5 @@ class AppState with ChangeNotifier {
     final parsed = json.decode(jsondata.toString()).cast<Map<String, dynamic>>();
     return parsed.map<Question>((json) => Question.fromMap(json)).toList();
   }
+  
 }

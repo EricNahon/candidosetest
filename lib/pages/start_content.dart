@@ -1,6 +1,8 @@
+import 'package:candidosetest/models/app_state.dart';
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+import 'package:provider/provider.dart';
 
+import '../models/constants.dart';
 import '../components/particle_background.dart';
 import '../components/animated_image.dart';
 
@@ -38,6 +40,8 @@ class CenteredText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
+
     return Center(
       child: Container(
         child: SingleChildScrollView(
@@ -62,7 +66,9 @@ class CenteredText extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  appState.currentContentIndex = HomePageContent.quizz;
+                },
                 child: Container(
                   width: 230,
                   child: Row(

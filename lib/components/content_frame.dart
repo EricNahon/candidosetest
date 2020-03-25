@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/constants.dart';
 import '../pages/about_content.dart';
 import '../pages/start_content.dart';
-import '../pages/releases_content.dart';
+import '../pages/quizz_content.dart';
 import '../pages/gif_content.dart';
 
 class ContentFrame extends StatelessWidget {
@@ -22,8 +22,8 @@ class ContentFrame extends StatelessWidget {
         return StartContent();
       case HomePageContent.about:
         return AboutContent();
-      case HomePageContent.releases:
-        return ReleasesContent();
+      case HomePageContent.quizz:
+        return QuizzContent();
       case HomePageContent.videos:
         return GifContent();
     }

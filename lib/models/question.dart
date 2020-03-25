@@ -25,21 +25,21 @@ class Question {
 
 class Answer {
   final String libelle;
-  final int value;
+  final int score;
 
-  Answer({this.libelle, this.value});
+  Answer({this.libelle, this.score});
 
   Map<String, dynamic> toMap() {
     return {
       'libelle': libelle,
-      'value': value,
+      'score': score,
     };
   }
 
   static Answer fromMap(Map<String, dynamic> map) {
     return Answer(
       libelle: map['libelle'],
-      value: map['value'],
+      score: map['score'],
     );
   }
 }

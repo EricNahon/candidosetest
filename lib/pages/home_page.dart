@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/constants.dart';
 import '../models/app_state.dart';
+import '../models/question.dart';
 import '../components/content_frame.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  HomePageContent selectedOption = HomePageContent.start;
+  AppState appState;
+  HomePageContent selectedOption;
 
   TabController tabController;
 
@@ -33,13 +35,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   void loadContent(BuildContext context, HomePageContent selectedContent) {
     setState(() {
-      this.selectedOption = selectedContent;
+      appState.currentContentIndex = selectedContent;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    appState = Provider.of<AppState>(context);
+    selectedOption = appState.currentContentIndex;
+    List<Question> questions = appState.questions;
 
     return Scaffold(
       appBar: AppBar(

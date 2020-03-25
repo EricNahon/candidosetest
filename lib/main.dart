@@ -10,15 +10,21 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (context) => AppState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AppState()),
+      ],
       child: MaterialApp(
         title: kAppTitle,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+        home: MaterialApp(
+          title: kAppTitle,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: HomePage(title: 'Questionnaire Candidose'),
         ),
-        home: HomePage(title: 'Questionnaire Candidose'),
       ),
     );
   }
